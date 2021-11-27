@@ -23,4 +23,9 @@ class daoSpecialty
         $this->modelSpecialty->save();
 
     }
+
+    public function getSpecialtyById($id){
+         return $this->modelSpecialty::where('id', $id);
+    }
+
 }

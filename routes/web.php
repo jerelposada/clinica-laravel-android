@@ -23,5 +23,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/specialties','logicBussines\SpecialtyController@index');
 Route::get('/specialties/create','logicBussines\SpecialtyController@create');
-Route::get('/specialties/{specialties}/edit','logicBussines\SpecialtyController@edit');
+Route::get('/specialties/{specialty}/edit','logicBussines\SpecialtyController@edit');
 Route::post('/specialties','logicBussines\SpecialtyController@store');
+Route::put('/specialties/{specialty}','logicBussines\SpecialtyController@update');
+Route::delete('/specialties/{specialty}/destroy','logicBussines\SpecialtyController@destroy');
+
+//las rutas Doctors
+Route::resource('doctors','logicBussines\DoctorController');
+
+//Patients

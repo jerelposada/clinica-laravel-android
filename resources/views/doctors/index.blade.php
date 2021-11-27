@@ -6,18 +6,18 @@
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">Especialidades</h3>
+                    <h3 class="mb-0">Medicos</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{url('/specialties/create')}}" class="btn btn-sm btn-primary">Nueva especialidad</a>
+                    <a href="{{url('/doctors/create')}}" class="btn btn-sm btn-primary">Nuevo Medico</a>
                 </div>
             </div>
         </div>
         <div class="card-body">
             @if(session('notification'))
-            <div class="alert alert-success" role="alert">
-                <strong>Success!</strong>{{session('notification')}}
-            </div>
+                <div class="alert alert-success" role="alert">
+                    <strong>Success!</strong>{{session('notification')}}
+                </div>
             @endif
         </div>
 
@@ -27,24 +27,28 @@
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Descripcion</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">documento</th>
                     <th scope="col">Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($specialties  as $specialty)
+                @foreach($doctors  as $doctor)
                     <tr>
                         <th scope="row">
-                            {{$specialty->name}}
+                            {{$doctor->name}}
                         </th>
                         <td>
-                            {{$specialty->description}}
+                            {{$doctor->email}}
                         </td>
                         <td>
-                            <form action="{{url('/specialties/'.$specialty->id.'/destroy')}}" method="post">
+                            {{$doctor->identity_card}}
+                        </td>
+                        <td>
+                            <form action="{{url('/doctors/'.$doctor->id.'/destroy')}}" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <a href="{{url('/specialties/'.$specialty->id.'/edit')}}" class="btn btn-primary btn-sm">Editar</a>
+                                <a href="{{url('/doctors/'.$doctor->id.'/edit')}}" class="btn btn-primary btn-sm">Editar</a>
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                             </form>
 
