@@ -9,7 +9,7 @@
                     <h3 class="mb-0">Medicos</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{url('/doctors/create')}}" class="btn btn-sm btn-primary">Nuevo Medico</a>
+                    <a href="{{url('/patients/create')}}" class="btn btn-sm btn-primary">Nuevo Paciente</a>
                 </div>
             </div>
         </div>
@@ -33,22 +33,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($doctors  as $doctor)
+                @foreach($patients  as $patient)
                     <tr>
                         <th scope="row">
-                            {{$doctor->name}}
+                            {{$patient->name}}
                         </th>
                         <td>
-                            {{$doctor->email}}
+                            {{$patient->email}}
                         </td>
                         <td>
-                            {{$doctor->identity_card}}
+                            {{$patient->identity_card}}
                         </td>
                         <td>
-                            <form action="{{url('/doctors/'.$doctor->id)}}" method="post">
+                            <form action="{{url('/patients/'.$patient->id)}}" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <a href="{{url('/doctors/'.$doctor->id.'/edit')}}" class="btn btn-primary btn-sm">Editar</a>
+                                <a href="{{url('/patients/'.$patient->id.'/edit')}}" class="btn btn-primary btn-sm">Editar</a>
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                             </form>
 
@@ -58,6 +58,9 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="card-body">
+        {{$patients->links()}}
     </div>
 
 @endsection

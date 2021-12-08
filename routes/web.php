@@ -21,14 +21,26 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // las rutas  Specialty
 
-Route::get('/specialties','logicBussines\SpecialtyController@index');
-Route::get('/specialties/create','logicBussines\SpecialtyController@create');
-Route::get('/specialties/{specialty}/edit','logicBussines\SpecialtyController@edit');
-Route::post('/specialties','logicBussines\SpecialtyController@store');
-Route::put('/specialties/{specialty}','logicBussines\SpecialtyController@update');
-Route::delete('/specialties/{specialty}/destroy','logicBussines\SpecialtyController@destroy');
+Route::middleware(['auth', 'admin'])->namespace('logicBussines\Admin')->group(function () {
+    Route::get('/specialties','SpecialtyController@index');
+    Route::get('/specialties/create','SpecialtyController@create');
+    Route::get('/specialties/{specialty}/edit','SpecialtyController@edit');
+    Route::post('/specialties','SpecialtyController@store');
+    Route::put('/specialties/{specialty}','SpecialtyController@update');
+    Route::delete('/specialties/{specialty}/destroy','SpecialtyController@destroy');
 
 //las rutas Doctors
-Route::resource('doctors','logicBussines\DoctorController');
+    Route::resource('doctors','DoctorController');
 
 //Patients
+    Route::resource('patients','PatientController');
+});
+
+
+Route::middleware(['auth','doctor'])->namespace('logicBussines\Doctor')->group(function () {
+    Route::get('/schedule','ScheduleController@edit');
+    Route::post('/schedule','ScheduleController@store');
+});
+
+
+

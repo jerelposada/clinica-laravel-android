@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\logicBussines;
+namespace App\Http\Controllers\logicBussines\Admin;
 
 use App\Http\Requests\validateSpecialty;
 use App\Models\dao\daoSpecialty;

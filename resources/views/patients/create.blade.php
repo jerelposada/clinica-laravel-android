@@ -6,10 +6,10 @@
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">Nuevo  medico</h3>
+                    <h3 class="mb-0">Nuevo  paciente</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{url('doctors')}}" class="btn btn-sm btn-default">Cancelar y volver</a>
+                    <a href="{{url('patients')}}" class="btn btn-sm btn-default">Cancelar y volver</a>
                 </div>
             </div>
         </div>
@@ -23,10 +23,10 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{url('doctors')}}" method="post">
+            <form action="{{url('patients')}}" method="post">
                 @csrf
-                <div action="{{url('doctors')}}" class="form-group">
-                    <label for="name">Nombre del Medico</label>
+                <div action="{{url('patients')}}" class="form-group">
+                    <label for="name">Nombre del Paciente</label>
                     <input type="text" name="name" value="{{old('name')}}" class="form-control">
                 </div>
 
@@ -49,7 +49,6 @@
                     <label for="email">Telefono / movil</label>
                     <input type="number" name="phone" value="{{old('phone')}}" class="form-control">
                 </div>
-
 
                 <div class="form-group">
                     <label for="email">Contraseña</label>

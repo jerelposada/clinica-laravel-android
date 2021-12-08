@@ -23,37 +23,39 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{url('doctors')}}" method="post">
+            <form action="{{url('doctors/'.$doctor->id)}}" method="post">
                 @csrf
-                <div action="{{url('doctors')}}" class="form-group">
+                @method('PUT')
+                <div  class="form-group">
                     <label for="name">Nombre del Medico</label>
-                    <input type="text" name="name" value="{{old('name')}}" class="form-control">
+                    <input type="text" name="name" value="{{old('name',$doctor->name)}}" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input type="email" name="email" value="{{old('email')}}" class="form-control">
+                    <input type="email" name="email" value="{{old('email',$doctor->email)}}" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Documento</label>
-                    <input type="number" name="identity_card" value="{{old('identity_card')}}" class="form-control">
+                    <input type="number" name="identity_card" value="{{old('identity_card',$doctor->identity_card)}}" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Direccion</label>
-                    <input type="text" name="address" value="{{old('address')}}" class="form-control">
+                    <input type="text" name="address" value="{{old('address',$doctor->address)}}" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Telefono / movil</label>
-                    <input type="number" name="phone" value="{{old('phone')}}" class="form-control">
+                    <input type="number" name="phone" value="{{old('phone',$doctor->phone)}}" class="form-control">
                 </div>
 
 
                 <div class="form-group">
                     <label for="email">Contraseña</label>
                     <input type="password" name="password" value="{{str_random(6)}}" class="form-control">
+                    <p>Ingrese un valor sólo si desea modificar la contraseña</p>
                 </div>
 
                 <button type="submit" class="btn btn-outline-success">
