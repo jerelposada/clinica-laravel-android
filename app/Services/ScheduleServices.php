@@ -20,6 +20,14 @@ class ScheduleServices implements  ScheduleServicesInterface
 
 
     }
+
+    public function isAvailableInterval($date,$doctorId, Carbon $start){
+        $exists = Appointment::where('doctor_id',$doctorId)
+            ->where('scheduled_date',$date)
+            ->where('scheduled_time',$start->format('H:i:s ')) ->exists();
+        return !$exists;
+    }
+
     public function getAvailableIntervals($date, $doctorId)
     {
 
@@ -48,15 +56,13 @@ class ScheduleServices implements  ScheduleServicesInterface
             $interval = [];
 
             $interval['start'] = $Start->format('g:i A');
-            $exists = Appointment::where('doctor_id',$doctorId)
-                ->where('scheduled_date',$date)
-                ->where('scheduled_time',$Start->format('H:i:s ')) ->exists();
+            $available = $this->isAvailableInterval($date,$doctorId,$Start);
 
             $Start->addMinutes(30);
             $interval['end'] = $Start->format('g:i A');
 
 
-            if(!$exists){
+            if($available){
                 $intervals[] = $interval;
             }
         }
