@@ -4,6 +4,7 @@ namespace App\Http\Controllers\logicBussines\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\validateUsers;
+use App\Models\Specialty;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        return view('doctors.create');
+        $specialties = Specialty::all();
+        return view('doctors.create',compact('specialties'));
     }
 
     /**
@@ -38,11 +40,14 @@ class DoctorController extends Controller
      */
     public function store(validateUsers $request)
     {
-        User::create($request->only('name', 'email', 'identity_card', 'address', 'phone') +
+
+       $user = User::create($request->only('name', 'email', 'identity_card', 'address', 'phone') +
             [
                 'role' => 'doctor',
                 'password' => bcrypt($request->input('password'))
             ]);
+
+       $user->specialty()->attach($request->input('specialties'));
         $notification = "El modico se ha registrado correctamente";
         return redirect('/doctors')->with(compact('notification'));
     }
@@ -67,7 +72,9 @@ class DoctorController extends Controller
     public function edit($id)
     {
         $doctor = User::doctors()->findOrFail($id);
-        return view('doctors.edit', compact('doctor'));
+        $specialties = Specialty::all();
+        $specialty_ids = $doctor->specialty()->pluck('specialties.id');
+        return view('doctors.edit', compact('doctor','specialties','specialty_ids'));
     }
 
     /**
@@ -88,6 +95,7 @@ class DoctorController extends Controller
 
         $user->fill($data);
         $user->save();
+        $user->specialty()->sync($request->input('specialties'));
         $notification = "la informacion del medico se ha actualizado correctamente";
         return redirect('/doctors')->with(compact('notification'));
     }

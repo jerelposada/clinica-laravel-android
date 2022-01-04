@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Specialty;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','pivot'
     ];
 
 
@@ -35,5 +36,9 @@ class User extends Authenticatable
 
     public  function scopeDoctors($query){
         return $query->where('role','doctor');
+    }
+
+    public function specialty(){
+       return  $this->belongsToMany(Specialty::class)->withTimestamps();
     }
 }

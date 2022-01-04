@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\logicBussines\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\validateSpecialty;
 use App\Models\dao\daoSpecialty;
 use App\Models\Specialty;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class SpecialtyController extends Controller
 {
