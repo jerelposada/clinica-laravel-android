@@ -45,7 +45,7 @@ Route::middleware(['auth','doctor'])->namespace('logicBussines\Doctor')->group(f
 Route::middleware(['auth',])->namespace('logicBussines')->group(function () {
     Route::get('/appointments/create','AppointmentController@create');
     Route::post('/appointments','AppointmentController@store');
-
+    Route::get('/appointments','AppointmentController@index');
 //Json
 
     Route::get('/specialties/{specialty}/doctors','Api\SpecialtyController@doctors');
