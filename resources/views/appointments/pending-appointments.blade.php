@@ -34,8 +34,8 @@
                     {{$appointment->type}}
                 </td>
                 <td>
-                    <form action="{{url('/patients/'.$appointment->id)}}" method="post">
-                        @method('DELETE')
+                    <form action="{{url('appointments/'.$appointment->id.'/cancel')}}" method="post">
+                        @method('put')
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm" title="cancelar cita">Cancelar</button>
                     </form>
